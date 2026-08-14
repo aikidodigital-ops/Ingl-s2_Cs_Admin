@@ -577,10 +577,8 @@
 
 <script>
   (function() {
-    // Configuración de enlaces a PDFs en Google Drive
-    // Reemplaza los IDs con los reales de tus archivos
-    const DRIVE_BASE = 'https://drive.google.com/file/d/';
-    const DRIVE_SUFFIX = '/preview'; // o '/view'
+    // Configuración de enlaces a PDFs en Google Drive para descarga directa
+    const DRIVE_BASE = 'https://drive.google.com/uc?export=download&id=';
 
     // Mapeo de archivos: cada categoría tiene un array de IDs de Google Drive
     const fileIds = {
@@ -631,11 +629,12 @@
         
         // Obtener el ID del archivo desde el mapeo
         const fileId = fileIds[cat.type]?.[i - 1] || '';
-        // Construir URL de Google Drive
-        const driveUrl = fileId ? `${DRIVE_BASE}${fileId}${DRIVE_SUFFIX}` : '#';
+        // Construir URL de descarga directa de Google Drive
+        const driveUrl = fileId ? `${DRIVE_BASE}${fileId}` : '#';
         btn.href = driveUrl;
         btn.target = '_blank';
         btn.rel = 'noopener noreferrer';
+        btn.download = ''; // Sugiere la descarga en lugar de abrir
         
         // Asignar data-png para el fallback de imagen (opcional)
         const pngName = `${cat.prefix}-${i}.png`;
@@ -655,20 +654,16 @@
       }
     });
 
-    // SCROLL SUAVE: ya está habilitado con CSS scroll-behavior: smooth
-    // Los enlaces del navbar apuntan a #planificacion, #descargas, etc.
-
-    // BOTÓN DRIVE: redirige a Google Drive (simulado con alert)
+    // BOTÓN DRIVE: redirige a Google Drive
     const driveBtn = document.querySelector('.btn-drive');
     if (driveBtn) {
       driveBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        // Reemplazar con la URL real de Google Drive de calificaciones
         window.open('https://docs.google.com/spreadsheets/d/1acJn1HGRhlewvfXQTPJU6J3CAkyp32hYiEq9z0BW7co/edit?usp=drive_link', '_blank');
       });
     }
 
-    console.log('𓂀 Inglés II · Enlaces a PDFs en Google Drive configurados');
+    console.log('𓂀 Inglés II · Enlaces de descarga directa configurados');
   })();
 </script>
 

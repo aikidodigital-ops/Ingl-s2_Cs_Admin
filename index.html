@@ -7,7 +7,7 @@
   <!-- Google Fonts: estilo épico + legibilidad -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=Inter:opsz@14..32&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=Inter:opsz@14..32&family=Montserrat:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     /* RESET & BASE */
     * {
@@ -21,19 +21,68 @@
     }
 
     body {
-      background-color: #f4e3c1;
-      background-image: radial-gradient(circle at 20% 30%, rgba(230, 194, 128, 0.3) 0%, #e6c280 90%);
+      background-color: #1a1a2e;
+      background-image:
+        /* Efecto glitter/escarcha fucsia */
+        radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 60% 70%, rgba(255, 20, 147, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.05) 0%, transparent 30%),
+        radial-gradient(circle at 10% 80%, rgba(0, 255, 255, 0.04) 0%, transparent 35%),
+        /* Partículas de glitter */
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.15) 0px, transparent 1px),
+        radial-gradient(circle at 35% 65%, rgba(255, 105, 180, 0.12) 0px, transparent 1px),
+        radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.1) 0px, transparent 1px),
+        radial-gradient(circle at 75% 85%, rgba(255, 20, 147, 0.08) 0px, transparent 1px),
+        radial-gradient(circle at 90% 45%, rgba(255, 105, 180, 0.1) 0px, transparent 1px),
+        radial-gradient(circle at 25% 90%, rgba(255, 255, 255, 0.08) 0px, transparent 1px),
+        radial-gradient(circle at 45% 45%, rgba(255, 105, 180, 0.06) 0px, transparent 1px),
+        radial-gradient(circle at 65% 55%, rgba(255, 20, 147, 0.07) 0px, transparent 1px),
+        radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.09) 0px, transparent 1px),
+        radial-gradient(circle at 5% 55%, rgba(255, 105, 180, 0.07) 0px, transparent 1px),
+        /* Gradiente base */
+        radial-gradient(circle at 10% 20%, rgba(255, 105, 180, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 8px);
       font-family: 'Montserrat', 'Inter', sans-serif;
-      color: #2c1f0c;
+      color: #e0e0e0;
       line-height: 1.5;
       min-height: 100vh;
       padding-top: 80px;
+      position: relative;
+    }
+
+    /* Capa adicional de glitter animado */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 105, 180, 0.03) 0px, transparent 2px),
+        radial-gradient(circle at 30% 60%, rgba(255, 20, 147, 0.02) 0px, transparent 2px),
+        radial-gradient(circle at 50% 30%, rgba(255, 105, 180, 0.03) 0px, transparent 2px),
+        radial-gradient(circle at 70% 70%, rgba(255, 20, 147, 0.02) 0px, transparent 2px),
+        radial-gradient(circle at 90% 40%, rgba(255, 105, 180, 0.03) 0px, transparent 2px);
+      background-size: 200px 200px;
+      animation: sparkle 8s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes sparkle {
+      0% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.1) rotate(180deg); }
+      100% { opacity: 0.3; transform: scale(1) rotate(360deg); }
     }
 
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px 40px;
+      position: relative;
+      z-index: 1;
     }
 
     /* ===== NAVBAR ===== */
@@ -43,11 +92,11 @@
       left: 0;
       width: 100%;
       backdrop-filter: blur(12px);
-      background: rgba(245, 230, 204, 0.75);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      background: rgba(26, 26, 46, 0.85);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 105, 180, 0.2);
       z-index: 1000;
       padding: 12px 24px;
-      border-bottom: 2px solid #b8943c;
+      border-bottom: 3px solid #ff69b4;
       transition: background 0.2s;
     }
 
@@ -61,15 +110,16 @@
     }
 
     .nav-brand {
-      font-family: 'Cinzel Decorative', cursive;
+      font-family: 'Orbitron', 'Press Start 2P', cursive;
       font-weight: 700;
       font-size: 1.4rem;
-      color: #7a5d2e;
+      color: #00ffff;
       letter-spacing: 2px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(255, 105, 180, 0.2);
     }
     .nav-brand span {
-      color: #b8860b;
+      color: #ff69b4;
+      text-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
     }
 
     .nav-links {
@@ -81,7 +131,7 @@
     .nav-links a {
       font-family: 'Cinzel', serif;
       font-weight: 600;
-      color: #3d2b13;
+      color: #e0e0e0;
       text-decoration: none;
       font-size: 1rem;
       padding: 6px 0;
@@ -99,12 +149,12 @@
       left: 0;
       width: 0%;
       height: 2px;
-      background: #c9a84c;
+      background: linear-gradient(90deg, #ff69b4, #00ffff);
       transition: 0.3s;
     }
 
     .nav-links a:hover {
-      color: #a77b2b;
+      color: #ff69b4;
       transform: translateY(-1px);
     }
     .nav-links a:hover::after {
@@ -116,19 +166,31 @@
       text-align: center;
       margin: 30px 0 40px;
       padding: 20px 10px;
+      position: relative;
+    }
+
+    .hero-title::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff69b4, #00ffff, transparent);
     }
 
     .hero-title h1 {
-      font-family: 'Cinzel Decorative', 'Cinzel', serif;
+      font-family: 'Orbitron', 'Press Start 2P', sans-serif;
       font-weight: 900;
       font-size: 3.8rem;
-      letter-spacing: 4px;
+      letter-spacing: 6px;
       display: inline-block;
-      background: linear-gradient(180deg, #f9e28c 0%, #d4af37 40%, #b8860b 70%, #8b6b2b 100%);
+      background: linear-gradient(180deg, #ff69b4 0%, #ff1493 40%, #00ffff 70%, #00ced1 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.3), 0 8px 20px rgba(184, 134, 11, 0.3);
+      text-shadow: 0 0 30px rgba(255, 105, 180, 0.3), 0 0 60px rgba(0, 255, 255, 0.2);
       transform: scale(1);
       transition: 0.3s;
       padding: 0 8px;
@@ -136,22 +198,23 @@
 
     .hero-title h1:hover {
       transform: scale(1.02);
-      text-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+      text-shadow: 0 0 50px rgba(255, 105, 180, 0.5), 0 0 100px rgba(0, 255, 255, 0.3);
     }
 
     .hero-sub {
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       font-size: 1.2rem;
-      color: #3d2b13;
+      color: #e0e0e0;
       letter-spacing: 6px;
-      background: rgba(245, 230, 204, 0.5);
+      background: rgba(255, 255, 255, 0.05);
       display: inline-block;
       padding: 4px 28px;
       border-radius: 40px;
       backdrop-filter: blur(2px);
-      border: 1px solid #d4af37;
+      border: 1px solid rgba(255, 105, 180, 0.3);
       margin-top: 8px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.1);
     }
 
     /* ===== SECCIONES ===== */
@@ -164,17 +227,17 @@
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 2.2rem;
-      color: #4d3516;
-      border-left: 6px solid #d4af37;
+      color: #00ffff;
+      border-left: 6px solid #ff69b4;
       padding-left: 18px;
       margin-bottom: 30px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      text-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
       position: relative;
     }
     .section-title::before {
-      content: "⸙";
+      content: "✦";
       margin-right: 12px;
-      color: #b8860b;
+      color: #ff69b4;
       font-size: 2rem;
     }
 
@@ -184,40 +247,47 @@
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
-      background: rgba(245, 230, 204, 0.4);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(4px);
       padding: 30px 20px;
       border-radius: 40px 12px 40px 12px;
-      border: 2px solid #c9a84c;
-      box-shadow: inset 0 0 30px rgba(184, 134, 11, 0.1);
+      border: 1px solid rgba(255, 105, 180, 0.2);
+      box-shadow: inset 0 0 60px rgba(255, 105, 180, 0.05), 0 0 40px rgba(0, 255, 255, 0.05);
     }
 
     .plan-card {
       flex: 1 1 200px;
-      background: #f5e6cc;
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 30px 8px 30px 8px;
       padding: 24px 20px;
       text-align: center;
-      box-shadow: 0 8px 0 #8b6b2b, 0 12px 20px rgba(0,0,0,0.1);
-      border: 1px solid #d4af37;
+      box-shadow: 0 8px 0 #ff69b4, 0 12px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 255, 255, 0.2);
       transition: 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 #ff69b4, 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .plan-card h3 {
       font-family: 'Cinzel', serif;
       font-weight: 700;
-      color: #5a3e1a;
+      color: #ff69b4;
       font-size: 1.6rem;
+      text-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
     }
     .plan-card .percent {
       font-size: 3rem;
       font-weight: 900;
-      color: #b8860b;
-      text-shadow: 0 2px 0 #7a5d2e;
+      color: #00ffff;
+      text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
     }
     .plan-card .label {
       font-weight: 500;
-      color: #2c1f0c;
+      color: #e0e0e0;
     }
 
     .plan-total {
@@ -225,21 +295,23 @@
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1.8rem;
-      color: #2c1f0c;
-      background: #d4af37;
+      color: #1a1a2e;
+      background: linear-gradient(135deg, #ff69b4, #00ffff);
       padding: 12px 20px;
       border-radius: 60px;
-      border: 2px solid #b8860b;
-      box-shadow: inset 0 -4px 0 #7a5d2e;
+      border: 2px solid #ff69b4;
+      box-shadow: inset 0 -4px 0 #00ffff, 0 0 40px rgba(255, 105, 180, 0.2);
       letter-spacing: 2px;
     }
 
     /* ===== DESCARGAS: SLABS ===== */
     .download-section {
-      background: rgba(230, 194, 128, 0.2);
+      background: rgba(255, 255, 255, 0.03);
       padding: 20px 20px;
       border-radius: 60px 12px 60px 12px;
-      border: 2px solid #b8943c;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.05);
     }
 
     .category-group {
@@ -249,11 +321,12 @@
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1.8rem;
-      color: #4d3516;
-      border-bottom: 3px double #b8860b;
+      color: #ff69b4;
+      border-bottom: 3px double #00ffff;
       display: inline-block;
       padding-right: 30px;
       margin-bottom: 16px;
+      text-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
     }
 
     .slab-grid {
@@ -262,23 +335,22 @@
       gap: 18px;
     }
 
-    /* ESTILO SLAB (LOSA) – FALLBACK potente sin PNG */
+    /* ESTILO SLAB (LOSA) – VIBE 80s */
     .slab-btn {
       position: relative;
-      background: #dac29c;
-      background-image: linear-gradient(145deg, #e8d4b0, #c9ae82);
-      border: 3px solid #8b6b2b;
+      background: linear-gradient(145deg, rgba(255, 105, 180, 0.15), rgba(0, 255, 255, 0.1));
+      border: 2px solid rgba(255, 105, 180, 0.3);
       border-radius: 16px 4px 16px 4px;
       padding: 14px 6px;
       font-family: 'Cinzel', serif;
       font-weight: 600;
-      color: #2c1f0c;
+      color: #e0e0e0;
       text-align: center;
       font-size: 0.9rem;
-      box-shadow: 
-        inset 0 -8px 0 #6a4e1e,
-        inset 0 8px 12px rgba(255, 215, 140, 0.6),
-        0 6px 12px rgba(0,0,0,0.3);
+      box-shadow:
+        inset 0 -8px 0 rgba(255, 105, 180, 0.3),
+        inset 0 8px 12px rgba(255, 105, 180, 0.1),
+        0 6px 20px rgba(0, 0, 0, 0.3);
       transition: 0.2s ease;
       cursor: pointer;
       display: flex;
@@ -287,12 +359,13 @@
       justify-content: center;
       min-height: 100px;
       text-decoration: none;
-      color: #2c1f0c;
-      text-shadow: 0 1px 0 #f5e6cc;
+      color: #e0e0e0;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
       border-style: solid;
-      border-color: #b8943c #6a4e1e #6a4e1e #b8943c;
+      border-color: rgba(255, 105, 180, 0.3) rgba(0, 255, 255, 0.2) rgba(0, 255, 255, 0.2) rgba(255, 105, 180, 0.3);
       letter-spacing: 0.5px;
       word-break: break-word;
+      backdrop-filter: blur(4px);
     }
 
     .slab-btn::before {
@@ -300,7 +373,7 @@
       position: absolute;
       inset: 4px;
       border-radius: 12px 2px 12px 2px;
-      background: repeating-linear-gradient(45deg, rgba(210, 180, 130, 0.2) 0px, rgba(210, 180, 130, 0.2) 4px, rgba(160, 120, 70, 0.1) 4px, rgba(160, 120, 70, 0.1) 8px);
+      background: repeating-linear-gradient(45deg, rgba(255, 105, 180, 0.05) 0px, rgba(255, 105, 180, 0.05) 4px, rgba(0, 255, 255, 0.05) 4px, rgba(0, 255, 255, 0.05) 8px);
       pointer-events: none;
       z-index: 0;
     }
@@ -316,22 +389,22 @@
     .slab-btn .slab-icon {
       font-size: 1.8rem;
       line-height: 1.2;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.3));
     }
 
     .slab-btn:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 
-        inset 0 -6px 0 #6a4e1e,
-        inset 0 8px 16px rgba(255, 215, 140, 0.8),
-        0 12px 24px rgba(0,0,0,0.3);
-      border-color: #d4af37 #8b6b2b #8b6b2b #d4af37;
-      background: #e8d4b0;
+      box-shadow:
+        inset 0 -6px 0 #ff69b4,
+        inset 0 8px 16px rgba(255, 105, 180, 0.2),
+        0 12px 30px rgba(0, 0, 0, 0.4);
+      border-color: #ff69b4 rgba(0, 255, 255, 0.4) rgba(0, 255, 255, 0.4) #ff69b4;
+      background: linear-gradient(145deg, rgba(255, 105, 180, 0.25), rgba(0, 255, 255, 0.15));
     }
 
     .slab-btn:active {
       transform: translateY(4px);
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .slab-btn[data-png] {
@@ -342,29 +415,29 @@
 
     /* ===== CALIFICACIONES ===== */
     .calification-box {
-      background: rgba(245, 230, 204, 0.5);
-      backdrop-filter: blur(2px);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(4px);
       border-radius: 60px 12px 60px 12px;
       padding: 40px 20px;
       text-align: center;
-      border: 2px solid #b8860b;
-      box-shadow: inset 0 0 40px rgba(184, 134, 11, 0.2);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      box-shadow: inset 0 0 60px rgba(255, 105, 180, 0.05), 0 0 40px rgba(0, 255, 255, 0.05);
     }
 
     .btn-drive {
       display: inline-flex;
       align-items: center;
       gap: 18px;
-      background: linear-gradient(145deg, #1a4d7a, #0f3557);
-      border: 3px solid #d4af37;
+      background: linear-gradient(145deg, #ff1493, #00ced1);
+      border: 3px solid #ff69b4;
       padding: 18px 42px;
       border-radius: 60px 12px 60px 12px;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1.6rem;
-      color: #f5e6cc;
-      text-shadow: 0 2px 0 #0a1e30;
-      box-shadow: 0 12px 0 #0a1e30, 0 12px 30px rgba(0,0,0,0.3);
+      color: #1a1a2e;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 0 #00ffff, 0 12px 40px rgba(0, 0, 0, 0.3);
       transition: 0.15s;
       cursor: pointer;
       text-decoration: none;
@@ -373,30 +446,31 @@
 
     .btn-drive:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 0 #0a1e30, 0 20px 40px rgba(0,0,0,0.4);
-      background: #1e5a8a;
+      box-shadow: 0 16px 0 #00ffff, 0 20px 50px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(145deg, #ff69b4, #00ffff);
     }
 
     .btn-drive:active {
       transform: translateY(8px);
-      box-shadow: 0 4px 0 #0a1e30;
+      box-shadow: 0 4px 0 #00ffff;
     }
 
     .btn-drive .icon {
       font-size: 2.8rem;
-      filter: drop-shadow(0 0 6px #d4af37);
+      filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.4));
     }
 
     /* ===== FOOTER ===== */
     .footer {
       margin-top: 70px;
-      background: rgba(44, 31, 12, 0.8);
+      background: rgba(26, 26, 46, 0.9);
       backdrop-filter: blur(8px);
       border-radius: 60px 12px 60px 12px;
       padding: 40px 24px 30px;
       text-align: center;
-      color: #f5e6cc;
-      border: 2px solid #b8943c;
+      color: #e0e0e0;
+      border: 1px solid rgba(255, 105, 180, 0.2);
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.05);
     }
 
     .footer p {
@@ -410,43 +484,55 @@
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1.4rem;
-      color: #d4af37;
-      text-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+      color: #00ffff;
+      text-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
     }
 
+    /* ===== BOTÓN WHATSAPP REDISEÑADO ===== */
     .btn-whatsapp {
       display: inline-flex;
       align-items: center;
       gap: 16px;
-      background: #25D366;
-      background: linear-gradient(145deg, #2eab5a, #128C7E);
-      border: 2px solid #d4af37;
+      background: linear-gradient(145deg, #ff69b4, #ff1493);
+      border: 2px solid #00ffff;
       padding: 16px 34px;
       border-radius: 60px 8px 60px 8px;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       font-size: 1.3rem;
-      color: #fff;
+      color: #1a1a2e;
       text-decoration: none;
       margin-top: 20px;
-      box-shadow: 0 8px 0 #0a5e3a, 0 12px 28px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 0 #00ffff, 0 12px 40px rgba(255, 105, 180, 0.3);
       transition: 0.15s;
       letter-spacing: 1px;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-whatsapp:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 0 #0a5e3a, 0 20px 36px rgba(0,0,0,0.5);
-      background: #2eab5a;
+      box-shadow: 0 12px 0 #00ffff, 0 20px 50px rgba(255, 105, 180, 0.4);
+      background: linear-gradient(145deg, #ff1493, #ff69b4);
     }
 
     .btn-whatsapp:active {
       transform: translateY(6px);
-      box-shadow: 0 2px 0 #0a5e3a;
+      box-shadow: 0 2px 0 #00ffff;
     }
 
     .btn-whatsapp .wp-icon {
       font-size: 2.2rem;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    }
+
+    /* Clase para ocultar el reproductor de YouTube */
+    .hidden-player {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
     }
 
     /* RESPONSIVE */
@@ -483,7 +569,7 @@
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-inner">
-    <div class="nav-brand">𓂀 <span>English II</span></div>
+    <div class="nav-brand">🎸 <span>English II</span></div>
     <div class="nav-links">
       <a href="#planification">Planification</a>
       <a href="#downloads">Downloads</a>
@@ -550,11 +636,11 @@
     <h2 class="section-title">Grades</h2>
     <div class="calification-box">
       <a href="#" class="btn-drive" target="_blank" rel="noopener">
-        <span class="icon">👁️‍🗨️</span> 
+        <span class="icon">🎸</span>
         <span>Access Google Drive</span>
         <span style="font-size:1rem;">📊</span>
       </a>
-      <p style="margin-top: 20px; font-weight: 300; color: #3d2b13;">Public Spreadsheet</p>
+      <p style="margin-top: 20px; font-weight: 300; color: #e0e0e0;">Public Spreadsheet</p>
     </div>
   </section>
 
@@ -563,81 +649,85 @@
     <div class="institution">🏛️ UNIVERSIDAD DE ORIENTE NUEVA ESPARTA - GUATAMARE - 2026</div>
     <p style="margin: 16px 0 8px;">Professor · Contact</p>
     <a href="https://wa.me/584123585427" target="_blank" rel="noopener" class="btn-whatsapp">
-      <span class="wp-icon">𓂀</span> Lic. Oney Clavijo
+      <span class="wp-icon">🛼</span> Lic. Oney Clavijo
       <span style="font-size:1.6rem;">💬</span>
     </a>
-    <p style="margin-top: 28px; font-size:0.9rem; opacity:0.7;">⸙ Knowledge is power · El conocimiento es poder ⸙</p>
+    <p style="margin-top: 28px; font-size:0.9rem; opacity:0.7;">✦ Knowledge is power · El conocimiento es poder ✦</p>
   </footer>
 
 </main>
 
+<!-- Contenedor del reproductor de YouTube (oculto) -->
+<div id="youtube-player" class="hidden-player"></div>
+
+<!-- 1. Cargar la API de YouTube IFrame -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
   (function() {
-    // Configuración de enlaces a PDFs en Google Drive para descarga directa
+    // ============================================================
+    // CONFIGURACIÓN DE DESCARGA DE PDFs (Google Drive)
+    // ============================================================
     const DRIVE_BASE = 'https://drive.google.com/uc?export=download&id=';
 
-    // Mapeo de archivos: cada categoría tiene un array de IDs de Google Drive
+    // IDs de archivos en Google Drive (reemplazar con los tuyos)
     const fileIds = {
       portafolios: [
-        '1nh9BZLmG-kSVEIHCoXQzLlCqP7Clld3R', // portafolios-1
-        '1KaCySUpapnVuVcaaxOpnWM_ALgzaYjVb', // portafolios-2
-        '1_rHxWSzLWL1W4mxOTM7FnKD5WH-8sN8D', // portafolios-3
-        '1gt138PFIkwrx_olz8zuS8uZovJ0ZUdVq', // portafolios-4
-        '10R8yt2n0_tFBhO1xgpPEWYCny9wwLtST', // portafolios-5
-        '1gC1x2C984AXjnuRdOI5OIkxzzkUHImbz', // portafolios-6
-        '1UTRdrl2_cfnDSeWa-qhRjXhVtue2z_31'  // portafolios-7
+        '1nh9BZLmG-kSVEIHCoXQzLlCqP7Clld3R',
+        '1KaCySUpapnVuVcaaxOpnWM_ALgzaYjVb',
+        '1_rHxWSzLWL1W4mxOTM7FnKD5WH-8sN8D',
+        '1gt138PFIkwrx_olz8zuS8uZovJ0ZUdVq',
+        '10R8yt2n0_tFBhO1xgpPEWYCny9wwLtST',
+        '1gC1x2C984AXjnuRdOI5OIkxzzkUHImbz',
+        '1UTRdrl2_cfnDSeWa-qhRjXhVtue2z_31'
       ],
       tarjetas: [
-        '1wLYJf6M7Hoq53E9Eu6PhXNPwsG13d9Uh', // tarjeta-1
-        '1i4nlrTZzLHxp5stv0V0B96-0HfmyQCdw', // tarjeta-2
-        '18xKLca-wCKkXRqNdWAoqy88OKalvX3kZ', // tarjeta-3
-        '1zIZnV_y7hm3-C2ezVzIfHoXI6KXPb-mK', // tarjeta-4
-        '1ZOOec-yYbNGR9sq3VRYTKvfre__D6znw', // tarjeta-5
-        '1fBNgevjr6EcU_SRZPGNGbfYQDl6mu9D9', // tarjeta-6
-        '1osYpIShVlFPWxx7iURCImGGesXKvDkvf'  // tarjeta-7
+        '1wLYJf6M7Hoq53E9Eu6PhXNPwsG13d9Uh',
+        '1i4nlrTZzLHxp5stv0V0B96-0HfmyQCdw',
+        '18xKLca-wCKkXRqNdWAoqy88OKalvX3kZ',
+        '1zIZnV_y7hm3-C2ezVzIfHoXI6KXPb-mK',
+        '1ZOOec-yYbNGR9sq3VRYTKvfre__D6znw',
+        '1fBNgevjr6EcU_SRZPGNGbfYQDl6mu9D9',
+        '1osYpIShVlFPWxx7iURCImGGesXKvDkvf'
       ],
       textos: [
-        '1W9k80bk8urfR0XTd9azt2EWM6s3fkk1N', // texto-1
-        '1pXyp68xyiil7tKYlgcy-vS9XS4Xi2wpn', // texto-2
-        '1VAcfWB2GIIM2crcjHJM2oXjpN-Ubspfg', // texto-3
-        '1fQOgSz93fxFOxIRVVfTF4GkirOvyWPNl', // texto-4
-        '10qhVrhLQxtldzCxv4hx3F5mXb6YYlCow', // texto-5
-        '1QNgnW52Y84GMwPN18TpW6RMJUiR4mDHK', // texto-6
-        '1rVG0nxLGwx-j3vX_ET5FkAa85AHfqtln'  // texto-7
+        '1W9k80bk8urfR0XTd9azt2EWM6s3fkk1N',
+        '1pXyp68xyiil7tKYlgcy-vS9XS4Xi2wpn',
+        '1VAcfWB2GIIM2crcjHJM2oXjpN-Ubspfg',
+        '1fQOgSz93fxFOxIRVVfTF4GkirOvyWPNl',
+        '10qhVrhLQxtldzCxv4hx3F5mXb6YYlCow',
+        '1QNgnW52Y84GMwPN18TpW6RMJUiR4mDHK',
+        '1rVG0nxLGwx-j3vX_ET5FkAa85AHfqtln'
       ]
     };
 
-    // Definición de categorías con sus IDs y prefijos
     const categories = [
       { id: 'slab-portafolios', prefix: 'portafolios', count: 7, icon: '📄', type: 'portafolios' },
       { id: 'slab-tarjetas', prefix: 'tarjeta', count: 7, icon: '🃏', type: 'tarjetas' },
       { id: 'slab-textos', prefix: 'texto', count: 7, icon: '📜', type: 'textos' }
     ];
 
+    // Generar botones de descarga
     categories.forEach(cat => {
       const container = document.getElementById(cat.id);
       if (!container) return;
       container.innerHTML = '';
-      
+
       for (let i = 1; i <= cat.count; i++) {
         const btn = document.createElement('a');
         btn.className = 'slab-btn';
-        
-        // Obtener el ID del archivo desde el mapeo
+
         const fileId = fileIds[cat.type]?.[i - 1] || '';
-        // Construir URL de descarga directa de Google Drive
         const driveUrl = fileId ? `${DRIVE_BASE}${fileId}` : '#';
         btn.href = driveUrl;
         btn.target = '_blank';
         btn.rel = 'noopener noreferrer';
-        btn.download = ''; // Sugiere la descarga en lugar de abrir
-        
-        // Asignar data-png para el fallback de imagen (opcional)
+        btn.download = '';
+
         const pngName = `${cat.prefix}-${i}.png`;
         btn.setAttribute('data-png', pngName);
         btn.style.setProperty('--bg-png', `url('${pngName}')`);
-        
-        // Contenido
+
         const iconSpan = document.createElement('span');
         iconSpan.className = 'slab-icon';
         iconSpan.textContent = cat.icon;
@@ -645,12 +735,12 @@
         labelSpan.textContent = `${i}`;
         btn.appendChild(iconSpan);
         btn.appendChild(labelSpan);
-        
+
         container.appendChild(btn);
       }
     });
 
-    // BOTÓN DRIVE: redirige a Google Drive
+    // Botón Drive
     const driveBtn = document.querySelector('.btn-drive');
     if (driveBtn) {
       driveBtn.addEventListener('click', function(e) {
@@ -659,10 +749,77 @@
       });
     }
 
-    console.log('𓂀 English II · Direct download links configured');
+    // ============================================================
+    // REPRODUCTOR OCULTO DE YOUTUBE (Playlist aleatoria actualizada)
+    // ============================================================
+    const videoIds = [
+      // ===== CYNDI LAUPER =====
+      'Y4WzttaoTTQ', // 911 (1989)
+      'Q53oZpyxZ-8', // When You Were Mine (1983) - Cover de Prince
+      'bXf8FIUvsbY', // Good Enough (1985) - De la película "The Goonies"
+      'ZONKoKIQ9RY', // All Through The Night (1984)
+      '8ffc0TCGIG4', // Money Changes Everything (1983) 
+      // Nota: Los siguientes IDs son ejemplos, necesitas los correctos
+      'F1mqrCTFoz4', // Time After Time (1983) 
+      'PIb6AZdTr-A', // Girls Just Want To Have Fun (1983) 
+      '8WpPfpvkjFg', // True Colors (1986)
+      'mgy9OWtraXQ', // She Bop (1983) 
+      'djV11Xbc914',  // A-Ha - Take On Me (1985) - Himno synth-pop
+      's__rX_WL100',  // Madonna - Like A Virgin (1984) - Clásico absoluto
+      '9SOryJvTAGs',  // The B-52's - Love Shack (1989) - Fiesta ochentera
+
+     
+      // ===== MADONNA =====
+      'KapHTsjh_Nw', // Material Girl (1984) 
+
+      // ===== BON JOVI =====
+      'lDK9QqIzhwk', // Livin' On A Prayer (1986)
+
+      // ===== GUNS N' ROSES =====
+      'qoflJn7zkFM', // Sweet Child O' Mine (1987)
+
+      // ===== AEROSMITH =====
+      'mBksMIl9Kf0', // ACDC Thunderstroke
+      'T-doQhcwDS8', // I Don't Want To Miss A Thing (1998) 
+
+      // ===== CLÁSICOS QUE SE MANTIENEN =====
+      'z_ZQ1ZFdIAI'  // Crazy
+    ];
+
+    let player;
+
+    window.onYouTubeIframeAPIReady = function() {
+      const randomIndex = Math.floor(Math.random() * videoIds.length);
+      const randomVideoId = videoIds[randomIndex];
+
+      player = new YT.Player('youtube-player', {
+        height: '1',
+        width: '1',
+        videoId: randomVideoId,
+        playerVars: {
+          'autoplay': 1,
+          'controls': 0,
+          'disablekb': 1,
+          'fs': 0,
+          'iv_load_policy': 3,
+          'modestbranding': 1,
+          'rel': 0,
+          'mute': 0
+        },
+        events: {
+          'onError': function(event) {
+            console.log('Error en reproductor de YouTube:', event.data);
+          },
+          'onReady': function(event) {
+            console.log('Reproductor listo, reproduciendo:', randomVideoId);
+          }
+        }
+      });
+    };
+
+    console.log('🎸 English II · 80s Vibe con glitter fucsia');
   })();
 </script>
 
-<!-- Note: Replace the Google Drive IDs in the fileIds array with your actual PDF file IDs -->
 </body>
 </html>

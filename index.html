@@ -23,12 +23,10 @@
     body {
       background-color: #1a1a2e;
       background-image:
-        /* Efecto glitter/escarcha fucsia */
         radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.08) 0%, transparent 40%),
         radial-gradient(circle at 60% 70%, rgba(255, 20, 147, 0.06) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.05) 0%, transparent 30%),
         radial-gradient(circle at 10% 80%, rgba(0, 255, 255, 0.04) 0%, transparent 35%),
-        /* Partículas de glitter */
         radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.15) 0px, transparent 1px),
         radial-gradient(circle at 35% 65%, rgba(255, 105, 180, 0.12) 0px, transparent 1px),
         radial-gradient(circle at 55% 15%, rgba(255, 255, 255, 0.1) 0px, transparent 1px),
@@ -39,7 +37,6 @@
         radial-gradient(circle at 65% 55%, rgba(255, 20, 147, 0.07) 0px, transparent 1px),
         radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.09) 0px, transparent 1px),
         radial-gradient(circle at 5% 55%, rgba(255, 105, 180, 0.07) 0px, transparent 1px),
-        /* Gradiente base */
         radial-gradient(circle at 10% 20%, rgba(255, 105, 180, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
         repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 8px);
@@ -48,10 +45,10 @@
       line-height: 1.5;
       min-height: 100vh;
       padding-top: 80px;
+      padding-bottom: 120px;
       position: relative;
     }
 
-    /* Capa adicional de glitter animado */
     body::after {
       content: '';
       position: fixed;
@@ -335,7 +332,6 @@
       gap: 18px;
     }
 
-    /* ESTILO SLAB (LOSA) – VIBE 80s */
     .slab-btn {
       position: relative;
       background: linear-gradient(145deg, rgba(255, 105, 180, 0.15), rgba(0, 255, 255, 0.1));
@@ -488,7 +484,7 @@
       text-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
     }
 
-    /* ===== BOTÓN WHATSAPP REDISEÑADO ===== */
+    /* ===== BOTÓN WHATSAPP ===== */
     .btn-whatsapp {
       display: inline-flex;
       align-items: center;
@@ -525,17 +521,163 @@
       filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
     }
 
-    /* Clase para ocultar el reproductor de YouTube */
-    .hidden-player {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
+    /* ============================================================
+       REPRODUCTOR OCHENTERO ESTILO "MASMELLO"
+       ============================================================ */
+    #youtube-player-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      background: linear-gradient(145deg, #1a1a2e, #2a1a3e);
+      border: 3px solid #ff69b4;
+      border-radius: 20px 8px 20px 8px;
+      padding: 14px 16px 16px 16px;
+      box-shadow:
+        0 0 30px rgba(255, 105, 180, 0.3),
+        0 0 60px rgba(0, 255, 255, 0.1),
+        inset 0 0 30px rgba(255, 105, 180, 0.05);
+      z-index: 9999;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      font-family: 'Cinzel', serif;
+      border-color: #ff69b4 #00ffff #00ffff #ff69b4;
     }
 
-    /* RESPONSIVE */
+    #youtube-player-container .player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid rgba(255, 105, 180, 0.3);
+    }
+
+    #youtube-player-container .player-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #ff69b4;
+      text-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #youtube-player-container .player-title .icon-80s {
+      font-size: 1rem;
+    }
+
+    #youtube-player-container .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    #youtube-player-container .ctrl-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 105, 180, 0.3);
+      border-radius: 12px 3px 12px 3px;
+      color: #e0e0e0;
+      padding: 6px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+      min-width: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-color: rgba(255, 105, 180, 0.3) rgba(0, 255, 255, 0.2) rgba(0, 255, 255, 0.2) rgba(255, 105, 180, 0.3);
+    }
+
+    #youtube-player-container .ctrl-btn:hover {
+      background: rgba(255, 105, 180, 0.2);
+      border-color: #ff69b4;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.2);
+    }
+
+    #youtube-player-container .ctrl-btn:active {
+      transform: scale(0.95);
+    }
+
+    #youtube-player-container .ctrl-btn.skip-btn {
+      font-size: 0.7rem;
+      padding: 6px 8px;
+    }
+
+    /* Barra de progreso estilo 80s */
+    .progress-container {
+      width: 100%;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-container .time-label {
+      font-size: 0.6rem;
+      font-family: 'Orbitron', monospace;
+      color: #00ffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+      min-width: 35px;
+    }
+
+    .progress-bar-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      border: 1px solid rgba(255, 105, 180, 0.2);
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff69b4, #00ffff);
+      border-radius: 10px;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    }
+
+    .progress-bar-track:hover .progress-bar-fill {
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+    }
+
+    /* Indicador de reproducción con animación */
+    .playing-indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #00ffff;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #00ffff;
+      animation: pulse-dot 1s ease-in-out infinite;
+      margin-left: 6px;
+    }
+
+    .playing-indicator.paused {
+      animation: none;
+      background: #ff69b4;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 720px) {
       .hero-title h1 {
         font-size: 2.5rem;
@@ -551,7 +693,14 @@
       .slab-grid {
         grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
       }
+      #youtube-player-container {
+        width: 280px;
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 12px;
+      }
     }
+
     @media (max-width: 480px) {
       .hero-title h1 {
         font-size: 1.8rem;
@@ -561,6 +710,25 @@
         padding: 14px 18px;
         flex-wrap: wrap;
       }
+      #youtube-player-container {
+        width: 240px;
+        bottom: 8px;
+        right: 8px;
+        padding: 8px 10px;
+      }
+      #youtube-player-container .ctrl-btn {
+        padding: 4px 7px;
+        font-size: 0.8rem;
+        min-width: 30px;
+      }
+      #youtube-player-container .player-title {
+        font-size: 0.6rem;
+      }
+    }
+
+    /* ===== ESTILO MASMELLO: BORDES REDONDEADOS ASIMÉTRICOS ===== */
+    .masmello-border {
+      border-radius: 24px 6px 24px 6px !important;
     }
   </style>
 </head>
@@ -609,21 +777,14 @@
   <section id="downloads">
     <h2 class="section-title">Downloads · Study Slabs</h2>
     <div class="download-section">
-      <!-- CATEGORÍA A -->
       <div class="category-group">
         <h3>📁 Portfolios</h3>
-        <div class="slab-grid" id="slab-portafolios">
-          <!-- se llena con JS -->
-        </div>
+        <div class="slab-grid" id="slab-portafolios"></div>
       </div>
-
-      <!-- CATEGORÍA B -->
       <div class="category-group">
         <h3>🗂️ Study Cards</h3>
         <div class="slab-grid" id="slab-tarjetas"></div>
       </div>
-
-      <!-- CATEGORÍA C -->
       <div class="category-group">
         <h3>📜 Texts</h3>
         <div class="slab-grid" id="slab-textos"></div>
@@ -657,20 +818,53 @@
 
 </main>
 
-<!-- Contenedor del reproductor de YouTube (oculto) -->
-<div id="youtube-player" class="hidden-player"></div>
+<!-- ============================================================
+     REPRODUCTOR OCHENTERO (al final de la página)
+     ============================================================ -->
+<div id="youtube-player-container" class="masmello-border">
+  <div class="player-header">
+    <div class="player-title">
+      <span class="icon-80s">🎵</span>
+      <span>80's</span>
+      <span class="playing-indicator" id="playIndicator"></span>
+    </div>
+    <span style="font-size:0.6rem; color:#ff69b4; font-family:'Orbitron',sans-serif;">✦ MIX ✦</span>
+  </div>
+
+  <!-- Reproductor YouTube (oculto, solo el iframe) -->
+  <div id="youtube-player" style="width:0;height:0;overflow:hidden;position:absolute;opacity:0;pointer-events:none;"></div>
+
+  <!-- Controles -->
+  <div class="player-controls">
+    <button class="ctrl-btn" id="playPauseBtn" title="Play / Pause">⏸</button>
+    <button class="ctrl-btn skip-btn" id="skipBtn" title="Skip (next random)">⏭</button>
+    <button class="ctrl-btn skip-btn" id="restartBtn" title="Restart">⟳</button>
+    <span style="flex:1;"></span>
+    <span id="volumeIcon" style="font-size:0.8rem;color:#00ffff;">🔊</span>
+  </div>
+
+  <!-- Barra de progreso -->
+  <div class="progress-container">
+    <span class="time-label" id="currentTimeLabel">0:00</span>
+    <div class="progress-bar-track" id="progressTrack">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="time-label" id="durationLabel">0:00</span>
+  </div>
+</div>
 
 <!-- 1. Cargar la API de YouTube IFrame -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
   (function() {
+    'use strict';
+
     // ============================================================
     // CONFIGURACIÓN DE DESCARGA DE PDFs (Google Drive)
     // ============================================================
     const DRIVE_BASE = 'https://drive.google.com/uc?export=download&id=';
 
-    // IDs de archivos en Google Drive (reemplazar con los tuyos)
     const fileIds = {
       portafolios: [
         '1nh9BZLmG-kSVEIHCoXQzLlCqP7Clld3R',
@@ -707,7 +901,6 @@
       { id: 'slab-textos', prefix: 'texto', count: 7, icon: '📜', type: 'textos' }
     ];
 
-    // Generar botones de descarga
     categories.forEach(cat => {
       const container = document.getElementById(cat.id);
       if (!container) return;
@@ -750,52 +943,137 @@
     }
 
     // ============================================================
-    // REPRODUCTOR OCULTO DE YOUTUBE (Playlist aleatoria actualizada)
+    // REPRODUCTOR OCHENTERO CON CONTROLES
     // ============================================================
     const videoIds = [
-      // ===== CYNDI LAUPER =====
-      'Y4WzttaoTTQ', // 911 (1989)
-      'Q53oZpyxZ-8', // When You Were Mine (1983) - Cover de Prince
-      'bXf8FIUvsbY', // Good Enough (1985) - De la película "The Goonies"
-      'ZONKoKIQ9RY', // All Through The Night (1984)
-      '8ffc0TCGIG4', // Money Changes Everything (1983) 
-      // Nota: Los siguientes IDs son ejemplos, necesitas los correctos
-      'F1mqrCTFoz4', // Time After Time (1983) 
-      'PIb6AZdTr-A', // Girls Just Want To Have Fun (1983) 
-      '8WpPfpvkjFg', // True Colors (1986)
-      'mgy9OWtraXQ', // She Bop (1983) 
-      'djV11Xbc914',  // A-Ha - Take On Me (1985) - Himno synth-pop
-      's__rX_WL100',  // Madonna - Like A Virgin (1984) - Clásico absoluto
-      '9SOryJvTAGs',  // The B-52's - Love Shack (1989) - Fiesta ochentera
-
-     
-      // ===== MADONNA =====
-      'KapHTsjh_Nw', // Material Girl (1984) 
-
-      // ===== BON JOVI =====
-      'lDK9QqIzhwk', // Livin' On A Prayer (1986)
-
-      // ===== GUNS N' ROSES =====
-      'qoflJn7zkFM', // Sweet Child O' Mine (1987)
-
-      // ===== AEROSMITH =====
-      'mBksMIl9Kf0', // ACDC Thunderstroke
-      'T-doQhcwDS8', // I Don't Want To Miss A Thing (1998) 
-
-      // ===== CLÁSICOS QUE SE MANTIENEN =====
-      'z_ZQ1ZFdIAI'  // Crazy
+      // Cyndi Lauper
+      'Y4WzttaoTTQ', 'Q53oZpyxZ-8', 'bXf8FIUvsbY', 'ZONKoKIQ9RY',
+      '8ffc0TCGIG4', 'F1mqrCTFoz4', 'PIb6AZdTr-A', '8WpPfpvkjFg',
+      'mgy9OWtraXQ',
+      // A-Ha, Madonna, B-52's, Bon Jovi, Guns N' Roses, Aerosmith
+      'djV11Xbc914', 's__rX_WL100', '9SOryJvTAGs', 'KapHTsjh_Nw',
+      'lDK9QqIzhwk', 'qoflJn7zkFM', 'mBksMIl9Kf0', 'T-doQhcwDS8',
+      'z_ZQ1ZFdIAI'
     ];
 
-    let player;
+    let player = null;
+    let currentVideoId = null;
+    let isPlaying = false;
+    let isPlayerReady = false;
+    let progressInterval = null;
+    let isDragging = false;
 
+    // Elementos DOM
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const progressFill = document.getElementById('progressFill');
+    const progressTrack = document.getElementById('progressTrack');
+    const currentTimeLabel = document.getElementById('currentTimeLabel');
+    const durationLabel = document.getElementById('durationLabel');
+    const playIndicator = document.getElementById('playIndicator');
+
+    // Helper: formatear tiempo
+    function formatTime(seconds) {
+      if (!seconds || isNaN(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    // Obtener video aleatorio
+    function getRandomVideoId() {
+      const idx = Math.floor(Math.random() * videoIds.length);
+      return videoIds[idx];
+    }
+
+    // Cargar un video en el reproductor
+    function loadVideo(videoId) {
+      if (!player || !isPlayerReady) return;
+      currentVideoId = videoId || getRandomVideoId();
+      player.loadVideoById(currentVideoId);
+      // El evento onStateChange actualizará el estado
+    }
+
+    // Reproducir/Pausar
+    function togglePlayPause() {
+      if (!player || !isPlayerReady) return;
+      if (isPlaying) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    }
+
+    // Saltar a siguiente aleatorio
+    function skipToRandom() {
+      if (!player || !isPlayerReady) return;
+      const newId = getRandomVideoId();
+      currentVideoId = newId;
+      player.loadVideoById(newId);
+      // El onStateChange actualizará
+    }
+
+    // Reiniciar canción actual
+    function restartSong() {
+      if (!player || !isPlayerReady || !currentVideoId) return;
+      player.seekTo(0);
+      if (!isPlaying) {
+        player.playVideo();
+      }
+    }
+
+    // Actualizar UI de progreso
+    function updateProgress() {
+      if (!player || !isPlayerReady || isDragging) return;
+      const duration = player.getDuration();
+      const currentTime = player.getCurrentTime();
+
+      if (duration && currentTime !== undefined) {
+        const percent = (currentTime / duration) * 100;
+        progressFill.style.width = Math.min(percent, 100) + '%';
+        currentTimeLabel.textContent = formatTime(currentTime);
+        durationLabel.textContent = formatTime(duration);
+      }
+    }
+
+    // Sincronizar estado de reproducción
+    function updatePlayState(playing) {
+      isPlaying = playing;
+      playPauseBtn.textContent = playing ? '⏸' : '▶️';
+      if (playIndicator) {
+        if (playing) {
+          playIndicator.className = 'playing-indicator';
+        } else {
+          playIndicator.className = 'playing-indicator paused';
+        }
+      }
+    }
+
+    // Iniciar intervalo de progreso
+    function startProgressInterval() {
+      if (progressInterval) clearInterval(progressInterval);
+      progressInterval = setInterval(updateProgress, 250);
+    }
+
+    function stopProgressInterval() {
+      if (progressInterval) {
+        clearInterval(progressInterval);
+        progressInterval = null;
+      }
+    }
+
+    // ============================================================
+    // API de YouTube
+    // ============================================================
     window.onYouTubeIframeAPIReady = function() {
-      const randomIndex = Math.floor(Math.random() * videoIds.length);
-      const randomVideoId = videoIds[randomIndex];
+      const initialVideo = getRandomVideoId();
+      currentVideoId = initialVideo;
 
       player = new YT.Player('youtube-player', {
-        height: '1',
-        width: '1',
-        videoId: randomVideoId,
+        height: '0',
+        width: '0',
+        videoId: initialVideo,
         playerVars: {
           'autoplay': 1,
           'controls': 0,
@@ -807,17 +1085,171 @@
           'mute': 0
         },
         events: {
-          'onError': function(event) {
-            console.log('Error en reproductor de YouTube:', event.data);
-          },
           'onReady': function(event) {
-            console.log('Reproductor listo, reproduciendo:', randomVideoId);
+            isPlayerReady = true;
+            // Intentar reproducir automáticamente (puede ser bloqueado por el navegador)
+            try {
+              player.playVideo();
+            } catch(e) {
+              console.log('Autoplay bloqueado, esperando interacción');
+            }
+            startProgressInterval();
+            console.log('🎸 Reproductor 80s listo');
+          },
+          'onStateChange': function(event) {
+            const state = event.data;
+            // YT.PlayerState: -1=sin empezar, 0=terminado, 1=reproduciendo, 2=pausado, 3=almacenando, 5=video insertado
+            if (state === YT.PlayerState.PLAYING) {
+              updatePlayState(true);
+              startProgressInterval();
+            } else if (state === YT.PlayerState.PAUSED) {
+              updatePlayState(false);
+            } else if (state === YT.PlayerState.ENDED) {
+              updatePlayState(false);
+              // Al terminar, pasar al siguiente automáticamente
+              setTimeout(() => {
+                if (player && isPlayerReady) {
+                  skipToRandom();
+                }
+              }, 1500);
+            } else if (state === YT.PlayerState.BUFFERING) {
+              // Esperar
+            } else if (state === YT.PlayerState.UNSTARTED) {
+              // No hacer nada
+            }
+          },
+          'onError': function(event) {
+            console.log('Error en reproductor:', event.data);
+            // Intentar recuperar con otro video
+            setTimeout(() => {
+              if (player && isPlayerReady) {
+                skipToRandom();
+              }
+            }, 2000);
           }
         }
       });
     };
 
-    console.log('🎸 English II · 80s Vibe con glitter fucsia');
+    // ============================================================
+    // EVENTOS DE CONTROLES
+    // ============================================================
+
+    // Play/Pause
+    playPauseBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Si el reproductor no está listo, intentar iniciar
+      if (!isPlayerReady) {
+        console.log('Reproductor no listo aún');
+        return;
+      }
+      togglePlayPause();
+    });
+
+    // Skip
+    skipBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!isPlayerReady) return;
+      skipToRandom();
+    });
+
+    // Restart
+    restartBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!isPlayerReady) return;
+      restartSong();
+    });
+
+    // ============================================================
+    // BARRA DE PROGRESO (arrastrable)
+    // ============================================================
+    function seekToPosition(clientX) {
+      if (!player || !isPlayerReady) return;
+      const rect = progressTrack.getBoundingClientRect();
+      const clickX = clientX - rect.left;
+      const percent = Math.min(Math.max(clickX / rect.width, 0), 1);
+      const duration = player.getDuration();
+      if (duration && duration > 0) {
+        const seekTime = percent * duration;
+        player.seekTo(seekTime);
+        progressFill.style.width = (percent * 100) + '%';
+        currentTimeLabel.textContent = formatTime(seekTime);
+      }
+    }
+
+    // Mouse events
+    progressTrack.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      isDragging = true;
+      seekToPosition(e.clientX);
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      seekToPosition(e.clientX);
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (isDragging) {
+        isDragging = false;
+        updateProgress(); // refrescar
+      }
+    });
+
+    // Touch events para móvil
+    progressTrack.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      if (touch) {
+        isDragging = true;
+        seekToPosition(touch.clientX);
+      }
+    });
+
+    progressTrack.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      if (touch) {
+        seekToPosition(touch.clientX);
+      }
+    });
+
+    progressTrack.addEventListener('touchend', function(e) {
+      isDragging = false;
+      updateProgress();
+    });
+
+    // ============================================================
+    // INTENTAR REPRODUCIR AL HACER CLIC EN CUALQUIER PARTE
+    // (para desbloquear autoplay en navegadores)
+    // ============================================================
+    let userInteracted = false;
+
+    document.addEventListener('click', function() {
+      if (!userInteracted && isPlayerReady && player) {
+        userInteracted = true;
+        try {
+          if (!isPlaying) {
+            player.playVideo();
+          }
+        } catch(e) {}
+      }
+    }, { once: false });
+
+    // También intentar al hacer clic en el reproductor
+    document.getElementById('youtube-player-container').addEventListener('click', function() {
+      if (!userInteracted && isPlayerReady && player) {
+        userInteracted = true;
+        try {
+          if (!isPlaying) {
+            player.playVideo();
+          }
+        } catch(e) {}
+      }
+    });
+
+    console.log('🎸 English II · 80s Vibe con reproductor estilo Masmello');
   })();
 </script>
 

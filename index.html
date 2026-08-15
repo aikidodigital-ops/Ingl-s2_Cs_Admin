@@ -528,7 +528,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 320px;
+      width: 340px;
       background: linear-gradient(145deg, #1a1a2e, #2a1a3e);
       border: 3px solid #ff69b4;
       border-radius: 20px 8px 20px 8px;
@@ -677,6 +677,64 @@
       50% { opacity: 0.3; transform: scale(0.7); }
     }
 
+    /* ===== NUEVA MARQUESINA ESTILO WINAMP / BOLSA DE VALORES ===== */
+    .marquee-container {
+      width: 100%;
+      margin-top: 10px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 105, 180, 0.2);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 6px 2px 6px 2px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: #00ffff;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      position: relative;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee-scroll 12s linear infinite;
+      padding-left: 100%;
+      will-change: transform;
+    }
+
+    .marquee-content span {
+      display: inline-block;
+      padding: 0 40px;
+      color: #ff69b4;
+      font-weight: 700;
+    }
+
+    .marquee-content .track-title {
+      color: #e0e0e0;
+      font-weight: 400;
+    }
+
+    .marquee-content .separator {
+      color: #ff69b4;
+      opacity: 0.5;
+    }
+
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Pausar la marquesina al pasar el mouse */
+    .marquee-container:hover .marquee-content {
+      animation-play-state: paused;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 720px) {
       .hero-title h1 {
@@ -694,7 +752,7 @@
         grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
       }
       #youtube-player-container {
-        width: 280px;
+        width: 290px;
         bottom: 10px;
         right: 10px;
         padding: 10px 12px;
@@ -711,7 +769,7 @@
         flex-wrap: wrap;
       }
       #youtube-player-container {
-        width: 240px;
+        width: 250px;
         bottom: 8px;
         right: 8px;
         padding: 8px 10px;
@@ -723,6 +781,13 @@
       }
       #youtube-player-container .player-title {
         font-size: 0.6rem;
+      }
+      .marquee-container {
+        font-size: 0.6rem;
+        height: 20px;
+      }
+      .marquee-content {
+        animation-duration: 10s;
       }
     }
 
@@ -819,7 +884,7 @@
 </main>
 
 <!-- ============================================================
-     REPRODUCTOR OCHENTERO (al final de la página)
+     REPRODUCTOR OCHENTERO (con marquesina)
      ============================================================ -->
 <div id="youtube-player-container" class="masmello-border">
   <div class="player-header">
@@ -850,6 +915,20 @@
       <div class="progress-bar-fill" id="progressFill"></div>
     </div>
     <span class="time-label" id="durationLabel">0:00</span>
+  </div>
+
+  <!-- MARQUESINA ESTILO WINAMP / BOLSA DE VALORES -->
+  <div class="marquee-container" id="marqueeContainer">
+    <div class="marquee-content" id="marqueeContent">
+      <span class="track-title" id="trackTitleDisplay">🎶 Cargando...</span>
+      <span class="separator">✦</span>
+      <span class="track-title">80's Mix</span>
+      <span class="separator">✦</span>
+      <span class="track-title" id="trackTitleDisplay2">🎶 Cargando...</span>
+      <span class="separator">✦</span>
+      <span class="track-title">80's Mix</span>
+      <span class="separator">✦</span>
+    </div>
   </div>
 </div>
 
@@ -943,18 +1022,34 @@
     }
 
     // ============================================================
-    // REPRODUCTOR OCHENTERO CON CONTROLES
+    // REPRODUCTOR OCHENTERO CON CONTROLES Y MARQUESINA
     // ============================================================
-    const videoIds = [
-      // Cyndi Lauper
-      'Y4WzttaoTTQ', 'Q53oZpyxZ-8', 'bXf8FIUvsbY', 'ZONKoKIQ9RY',
-      '8ffc0TCGIG4', 'F1mqrCTFoz4', 'PIb6AZdTr-A', '8WpPfpvkjFg',
-      'mgy9OWtraXQ',
-      // A-Ha, Madonna, B-52's, Bon Jovi, Guns N' Roses, Aerosmith
-      'djV11Xbc914', 's__rX_WL100', '9SOryJvTAGs', 'KapHTsjh_Nw',
-      'lDK9QqIzhwk', 'qoflJn7zkFM', 'mBksMIl9Kf0', 'T-doQhcwDS8',
-      'z_ZQ1ZFdIAI'
+
+    // Lista de canciones con título y videoId
+    const playlist = [
+      { title: 'Cyndi Lauper - Girls Just Want to Have Fun', id: 'Y4WzttaoTTQ' },
+      { title: 'Cyndi Lauper - Time After Time', id: 'Q53oZpyxZ-8' },
+      { title: 'Cyndi Lauper - True Colors', id: 'bXf8FIUvsbY' },
+      { title: 'Cyndi Lauper - She Bop', id: 'ZONKoKIQ9RY' },
+      { title: 'Cyndi Lauper - All Through the Night', id: '8ffc0TCGIG4' },
+      { title: 'Cyndi Lauper - I Drove All Night', id: 'F1mqrCTFoz4' },
+      { title: 'Cyndi Lauper - Money Changes Everything', id: 'PIb6AZdTr-A' },
+      { title: 'Cyndi Lauper - The Goonies \'R\' Good Enough', id: '8WpPfpvkjFg' },
+      { title: 'Cyndi Lauper - Change of Heart', id: 'mgy9OWtraXQ' },
+      { title: 'A-Ha - Take On Me', id: 'djV11Xbc914' },
+      { title: 'Madonna - Like a Prayer', id: 's__rX_WL100' },
+      { title: 'B-52\'s - Love Shack', id: '9SOryJvTAGs' },
+      { title: 'Bon Jovi - Livin\' on a Prayer', id: 'KapHTsjh_Nw' },
+      { title: 'Guns N\' Roses - Sweet Child O\' Mine', id: 'lDK9QqIzhwk' },
+      { title: 'Guns N\' Roses - Paradise City', id: 'qoflJn7zkFM' },
+      { title: 'Aerosmith - I Don\'t Want to Miss a Thing', id: 'mBksMIl9Kf0' },
+      { title: 'Aerosmith - Crazy', id: 'T-doQhcwDS8' },
+      { title: 'Aerosmith - Cryin\'', id: 'z_ZQ1ZFdIAI' }
     ];
+
+    // Mapa de videoId -> título
+    const titleMap = {};
+    playlist.forEach(item => { titleMap[item.id] = item.title; });
 
     let player = null;
     let currentVideoId = null;
@@ -972,6 +1067,8 @@
     const currentTimeLabel = document.getElementById('currentTimeLabel');
     const durationLabel = document.getElementById('durationLabel');
     const playIndicator = document.getElementById('playIndicator');
+    const trackTitleDisplay = document.getElementById('trackTitleDisplay');
+    const trackTitleDisplay2 = document.getElementById('trackTitleDisplay2');
 
     // Helper: formatear tiempo
     function formatTime(seconds) {
@@ -982,17 +1079,25 @@
     }
 
     // Obtener video aleatorio
-    function getRandomVideoId() {
-      const idx = Math.floor(Math.random() * videoIds.length);
-      return videoIds[idx];
+    function getRandomVideo() {
+      const idx = Math.floor(Math.random() * playlist.length);
+      return playlist[idx];
+    }
+
+    // Actualizar título en la marquesina
+    function updateMarqueeTitle(videoId) {
+      const title = titleMap[videoId] || '🎶 80\'s Mix';
+      trackTitleDisplay.textContent = title;
+      trackTitleDisplay2.textContent = title;
     }
 
     // Cargar un video en el reproductor
-    function loadVideo(videoId) {
+    function loadVideo(video) {
       if (!player || !isPlayerReady) return;
-      currentVideoId = videoId || getRandomVideoId();
-      player.loadVideoById(currentVideoId);
-      // El evento onStateChange actualizará el estado
+      const vid = video || getRandomVideo();
+      currentVideoId = vid.id;
+      updateMarqueeTitle(vid.id);
+      player.loadVideoById(vid.id);
     }
 
     // Reproducir/Pausar
@@ -1008,10 +1113,10 @@
     // Saltar a siguiente aleatorio
     function skipToRandom() {
       if (!player || !isPlayerReady) return;
-      const newId = getRandomVideoId();
-      currentVideoId = newId;
-      player.loadVideoById(newId);
-      // El onStateChange actualizará
+      const vid = getRandomVideo();
+      currentVideoId = vid.id;
+      updateMarqueeTitle(vid.id);
+      player.loadVideoById(vid.id);
     }
 
     // Reiniciar canción actual
@@ -1067,13 +1172,14 @@
     // API de YouTube
     // ============================================================
     window.onYouTubeIframeAPIReady = function() {
-      const initialVideo = getRandomVideoId();
-      currentVideoId = initialVideo;
+      const initialVideo = getRandomVideo();
+      currentVideoId = initialVideo.id;
+      updateMarqueeTitle(initialVideo.id);
 
       player = new YT.Player('youtube-player', {
         height: '0',
         width: '0',
-        videoId: initialVideo,
+        videoId: initialVideo.id,
         playerVars: {
           'autoplay': 1,
           'controls': 0,
@@ -1087,7 +1193,6 @@
         events: {
           'onReady': function(event) {
             isPlayerReady = true;
-            // Intentar reproducir automáticamente (puede ser bloqueado por el navegador)
             try {
               player.playVideo();
             } catch(e) {
@@ -1098,7 +1203,6 @@
           },
           'onStateChange': function(event) {
             const state = event.data;
-            // YT.PlayerState: -1=sin empezar, 0=terminado, 1=reproduciendo, 2=pausado, 3=almacenando, 5=video insertado
             if (state === YT.PlayerState.PLAYING) {
               updatePlayState(true);
               startProgressInterval();
@@ -1106,7 +1210,6 @@
               updatePlayState(false);
             } else if (state === YT.PlayerState.ENDED) {
               updatePlayState(false);
-              // Al terminar, pasar al siguiente automáticamente
               setTimeout(() => {
                 if (player && isPlayerReady) {
                   skipToRandom();
@@ -1120,7 +1223,6 @@
           },
           'onError': function(event) {
             console.log('Error en reproductor:', event.data);
-            // Intentar recuperar con otro video
             setTimeout(() => {
               if (player && isPlayerReady) {
                 skipToRandom();
@@ -1135,25 +1237,18 @@
     // EVENTOS DE CONTROLES
     // ============================================================
 
-    // Play/Pause
     playPauseBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      // Si el reproductor no está listo, intentar iniciar
-      if (!isPlayerReady) {
-        console.log('Reproductor no listo aún');
-        return;
-      }
+      if (!isPlayerReady) return;
       togglePlayPause();
     });
 
-    // Skip
     skipBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       if (!isPlayerReady) return;
       skipToRandom();
     });
 
-    // Restart
     restartBtn.addEventListener('click', function(e) {
       e.stopPropagation();
       if (!isPlayerReady) return;
@@ -1177,7 +1272,6 @@
       }
     }
 
-    // Mouse events
     progressTrack.addEventListener('mousedown', function(e) {
       e.preventDefault();
       isDragging = true;
@@ -1192,11 +1286,10 @@
     document.addEventListener('mouseup', function() {
       if (isDragging) {
         isDragging = false;
-        updateProgress(); // refrescar
+        updateProgress();
       }
     });
 
-    // Touch events para móvil
     progressTrack.addEventListener('touchstart', function(e) {
       e.preventDefault();
       const touch = e.touches[0];
@@ -1221,8 +1314,7 @@
     });
 
     // ============================================================
-    // INTENTAR REPRODUCIR AL HACER CLIC EN CUALQUIER PARTE
-    // (para desbloquear autoplay en navegadores)
+    // INTENTAR REPRODUCIR AL HACER CLIC
     // ============================================================
     let userInteracted = false;
 
@@ -1237,7 +1329,6 @@
       }
     }, { once: false });
 
-    // También intentar al hacer clic en el reproductor
     document.getElementById('youtube-player-container').addEventListener('click', function() {
       if (!userInteracted && isPlayerReady && player) {
         userInteracted = true;
@@ -1249,7 +1340,7 @@
       }
     });
 
-    console.log('🎸 English II · 80s Vibe con reproductor estilo Masmello');
+    console.log('🎸 English II · 80s Vibe con marquesina estilo Winamp');
   })();
 </script>
 

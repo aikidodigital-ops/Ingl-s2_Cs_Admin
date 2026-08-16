@@ -677,7 +677,7 @@
       50% { opacity: 0.3; transform: scale(0.7); }
     }
 
-    /* ===== NUEVA MARQUESINA ESTILO WINAMP / BOLSA DE VALORES ===== */
+    /* ===== MARQUESINA SIMPLIFICADA ===== */
     .marquee-container {
       width: 100%;
       margin-top: 10px;
@@ -703,26 +703,15 @@
     .marquee-content {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee-scroll 12s linear infinite;
+      animation: marquee-scroll 15s linear infinite;
       padding-left: 100%;
       will-change: transform;
-    }
-
-    .marquee-content span {
-      display: inline-block;
-      padding: 0 40px;
-      color: #ff69b4;
-      font-weight: 700;
     }
 
     .marquee-content .track-title {
       color: #e0e0e0;
       font-weight: 400;
-    }
-
-    .marquee-content .separator {
-      color: #ff69b4;
-      opacity: 0.5;
+      padding: 0 20px;
     }
 
     @keyframes marquee-scroll {
@@ -730,7 +719,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* Pausar la marquesina al pasar el mouse */
     .marquee-container:hover .marquee-content {
       animation-play-state: paused;
     }
@@ -787,7 +775,7 @@
         height: 20px;
       }
       .marquee-content {
-        animation-duration: 10s;
+        animation-duration: 12s;
       }
     }
 
@@ -884,7 +872,7 @@
 </main>
 
 <!-- ============================================================
-     REPRODUCTOR OCHENTERO (con marquesina)
+     REPRODUCTOR OCHENTERO (con marquesina simplificada)
      ============================================================ -->
 <div id="youtube-player-container" class="masmello-border">
   <div class="player-header">
@@ -917,17 +905,10 @@
     <span class="time-label" id="durationLabel">0:00</span>
   </div>
 
-  <!-- MARQUESINA ESTILO WINAMP / BOLSA DE VALORES -->
+  <!-- MARQUESINA SIMPLIFICADA - SOLO EL NOMBRE DE LA CANCIÓN -->
   <div class="marquee-container" id="marqueeContainer">
     <div class="marquee-content" id="marqueeContent">
       <span class="track-title" id="trackTitleDisplay">🎶 Cargando...</span>
-      <span class="separator">✦</span>
-      <span class="track-title">80's Mix</span>
-      <span class="separator">✦</span>
-      <span class="track-title" id="trackTitleDisplay2">🎶 Cargando...</span>
-      <span class="separator">✦</span>
-      <span class="track-title">80's Mix</span>
-      <span class="separator">✦</span>
     </div>
   </div>
 </div>
@@ -1022,7 +1003,7 @@
     }
 
     // ============================================================
-    // REPRODUCTOR OCHENTERO CON CONTROLES Y MARQUESINA
+    // REPRODUCTOR OCHENTERO CON CONTROLES Y MARQUESINA SIMPLIFICADA
     // ============================================================
 
     // Lista de canciones con título y videoId
@@ -1068,7 +1049,6 @@
     const durationLabel = document.getElementById('durationLabel');
     const playIndicator = document.getElementById('playIndicator');
     const trackTitleDisplay = document.getElementById('trackTitleDisplay');
-    const trackTitleDisplay2 = document.getElementById('trackTitleDisplay2');
 
     // Helper: formatear tiempo
     function formatTime(seconds) {
@@ -1084,22 +1064,10 @@
       return playlist[idx];
     }
 
-    // Actualizar título en la marquesina - AHORA ACTUALIZA TODOS LOS ELEMENTOS
+    // Actualizar título en la marquesina - SIMPLIFICADO
     function updateMarqueeTitle(videoId) {
       const title = titleMap[videoId] || '🎶 80\'s Mix';
-      // Actualizar ambos elementos de título
       trackTitleDisplay.textContent = title;
-      trackTitleDisplay2.textContent = title;
-      
-      // También actualizar los elementos de texto estático "80's Mix" que están en la marquesina
-      const allSpans = document.querySelectorAll('.marquee-content .track-title');
-      // El primer span es trackTitleDisplay, el segundo es "80's Mix", el tercero es trackTitleDisplay2, el cuarto es "80's Mix"
-      // Actualizamos solo los que no son los específicos (índices 1 y 3)
-      if (allSpans.length >= 4) {
-        // El índice 1 y 3 son los "80's Mix" estáticos
-        allSpans[1].textContent = title;
-        allSpans[3].textContent = title;
-      }
     }
 
     // Cargar un video en el reproductor
@@ -1172,13 +1140,6 @@
       progressInterval = setInterval(updateProgress, 250);
     }
 
-    function stopProgressInterval() {
-      if (progressInterval) {
-        clearInterval(progressInterval);
-        progressInterval = null;
-      }
-    }
-
     // ============================================================
     // API de YouTube
     // ============================================================
@@ -1226,10 +1187,6 @@
                   skipToRandom();
                 }
               }, 1500);
-            } else if (state === YT.PlayerState.BUFFERING) {
-              // Esperar
-            } else if (state === YT.PlayerState.UNSTARTED) {
-              // No hacer nada
             }
           },
           'onError': function(event) {
@@ -1351,7 +1308,7 @@
       }
     });
 
-    console.log('🎸 English II · 80s Vibe con marquesina estilo Winamp');
+    console.log('🎸 English II · 80s Vibe con marquesina simplificada');
   })();
 </script>
 

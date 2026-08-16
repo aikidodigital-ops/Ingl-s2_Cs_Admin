@@ -905,10 +905,10 @@
     <span class="time-label" id="durationLabel">0:00</span>
   </div>
 
-  <!-- MARQUESINA SIMPLIFICADA - SOLO EL NOMBRE DE LA CANCIÓN -->
+  <!-- MARQUESINA SIMPLIFICADA - FRASE FIJA -->
   <div class="marquee-container" id="marqueeContainer">
     <div class="marquee-content" id="marqueeContent">
-      <span class="track-title" id="trackTitleDisplay">🎶 Cargando...</span>
+      <span class="track-title" id="trackTitleDisplay">✦ BEST MUSIC EVER ✦</span>
     </div>
   </div>
 </div>
@@ -1012,20 +1012,21 @@
       { title: 'Cyndi Lauper - Time After Time', id: 'Q53oZpyxZ-8' },
       { title: 'Cyndi Lauper - True Colors', id: 'bXf8FIUvsbY' },
       { title: 'Cyndi Lauper - She Bop', id: 'ZONKoKIQ9RY' },
-      { title: 'Cyndi Lauper - All Through the Night', id: 'PIb6AZdTr-A' },
+      { title: 'Cyndi Lauper - All Through the Night', id: '8ffc0TCGIG4' },
       { title: 'Cyndi Lauper - I Drove All Night', id: 'F1mqrCTFoz4' },
-      { title: 'Cyndi Lauper - Money Changes Everything', id: '8ffc0TCGIG4' },
+      { title: 'Cyndi Lauper - Money Changes Everything', id: 'PIb6AZdTr-A' },
       { title: 'Cyndi Lauper - The Goonies \'R\' Good Enough', id: '8WpPfpvkjFg' },
       { title: 'Cyndi Lauper - Change of Heart', id: 'mgy9OWtraXQ' },
       { title: 'A-Ha - Take On Me', id: 'djV11Xbc914' },
       { title: 'Madonna - Like a Prayer', id: 's__rX_WL100' },
       { title: 'B-52\'s - Love Shack', id: '9SOryJvTAGs' },
-      { title: 'Bon Jovi - Livin\' on a Prayer', id: 'lDK9QqIzhwk' },
-      { title: 'Guns N\' Roses - Sweet Child O\' Mine', id: 'KapHTsjh_Nw' },
+      { title: 'Bon Jovi - Livin\' on a Prayer', id: 'KapHTsjh_Nw' },
+      { title: 'Guns N\' Roses - Sweet Child O\' Mine', id: 'lDK9QqIzhwk' },
       { title: 'Guns N\' Roses - Paradise City', id: 'qoflJn7zkFM' },
       { title: 'Aerosmith - I Don\'t Want to Miss a Thing', id: 'mBksMIl9Kf0' },
       { title: 'Aerosmith - Crazy', id: 'T-doQhcwDS8' },
-      { title: 'Aerosmith - Cryin\'', id: 'z_ZQ1ZFdIAI' }
+      { title: 'Aerosmith - Cryin\'', id: 'z_ZQ1ZFdIAI' },
+      { title: 'Billy Idol - Dancing With Myself', id: 'FG1NrQYXjLU' }
     ];
 
     // Mapa de videoId -> título
@@ -1067,10 +1068,8 @@
 
     // Actualizar título en la marquesina - CORREGIDO
     function updateMarqueeTitle(videoId) {
-      const title = titleMap[videoId] || '🎶 80\'s Mix';
-      trackTitleDisplay.textContent = title;
-      
-      // Corrección: Reiniciar explícitamente la animación CSS para que el nuevo texto se muestre sin cortes
+      // Logic for dynamic text replacement has been removed to keep a fixed phrase.
+      // Resetting the CSS animation explicitly so it keeps displaying smoothly.
       const marquee = document.getElementById('marqueeContent');
       if (marquee) {
         marquee.style.animation = 'none';

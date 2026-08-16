@@ -1084,11 +1084,22 @@
       return playlist[idx];
     }
 
-    // Actualizar título en la marquesina
+    // Actualizar título en la marquesina - AHORA ACTUALIZA TODOS LOS ELEMENTOS
     function updateMarqueeTitle(videoId) {
       const title = titleMap[videoId] || '🎶 80\'s Mix';
+      // Actualizar ambos elementos de título
       trackTitleDisplay.textContent = title;
       trackTitleDisplay2.textContent = title;
+      
+      // También actualizar los elementos de texto estático "80's Mix" que están en la marquesina
+      const allSpans = document.querySelectorAll('.marquee-content .track-title');
+      // El primer span es trackTitleDisplay, el segundo es "80's Mix", el tercero es trackTitleDisplay2, el cuarto es "80's Mix"
+      // Actualizamos solo los que no son los específicos (índices 1 y 3)
+      if (allSpans.length >= 4) {
+        // El índice 1 y 3 son los "80's Mix" estáticos
+        allSpans[1].textContent = title;
+        allSpans[3].textContent = title;
+      }
     }
 
     // Cargar un video en el reproductor

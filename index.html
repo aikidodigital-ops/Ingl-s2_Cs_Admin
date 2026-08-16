@@ -1038,6 +1038,7 @@
     let isPlayerReady = false;
     let progressInterval = null;
     let isDragging = false;
+    let skipTimeout = null; // Corrección: Variable para controlar superposición de saltos
 
     // Elementos DOM
     const playPauseBtn = document.getElementById('playPauseBtn');
@@ -1064,19 +1065,18 @@
       return playlist[idx];
     }
 
-    // Actualizar título en la marquesina - SIMPLIFICADO
+    // Actualizar título en la marquesina - CORREGIDO
     function updateMarqueeTitle(videoId) {
       const title = titleMap[videoId] || '🎶 80\'s Mix';
       trackTitleDisplay.textContent = title;
-    }
-
-    // Cargar un video en el reproductor
-    function loadVideo(video) {
-      if (!player || !isPlayerReady) return;
-      const vid = video || getRandomVideo();
-      currentVideoId = vid.id;
-      updateMarqueeTitle(vid.id);
-      player.loadVideoById(vid.id);
+      
+      // Corrección: Reiniciar explícitamente la animación CSS para que el nuevo texto se muestre sin cortes
+      const marquee = document.getElementById('marqueeContent');
+      if (marquee) {
+        marquee.style.animation = 'none';
+        void marquee.offsetWidth; // Disparar repintado del navegador (reflow)
+        marquee.style.animation = 'marquee-scroll 15s linear infinite';
+      }
     }
 
     // Reproducir/Pausar
@@ -1089,9 +1089,11 @@
       }
     }
 
-    // Saltar a siguiente aleatorio
+    // Saltar a siguiente aleatorio - CORREGIDO
     function skipToRandom() {
       if (!player || !isPlayerReady) return;
+      if (skipTimeout) clearTimeout(skipTimeout); // Evitar saltos en ráfaga
+      
       const vid = getRandomVideo();
       currentVideoId = vid.id;
       updateMarqueeTitle(vid.id);
@@ -1178,11 +1180,22 @@
             if (state === YT.PlayerState.PLAYING) {
               updatePlayState(true);
               startProgressInterval();
+              
+              // Corrección central: Sincronización absoluta garantizada al leer el ID del video directamente desde la API
+              const videoData = player.getVideoData();
+              if (videoData && videoData.video_id) {
+                if (currentVideoId !== videoData.video_id) {
+                  currentVideoId = videoData.video_id;
+                  updateMarqueeTitle(videoData.video_id);
+                }
+              }
             } else if (state === YT.PlayerState.PAUSED) {
               updatePlayState(false);
             } else if (state === YT.PlayerState.ENDED) {
               updatePlayState(false);
-              setTimeout(() => {
+              // Corrección: Prevención de condiciones de carrera con interacciones del usuario
+              if (skipTimeout) clearTimeout(skipTimeout);
+              skipTimeout = setTimeout(() => {
                 if (player && isPlayerReady) {
                   skipToRandom();
                 }
@@ -1191,7 +1204,8 @@
           },
           'onError': function(event) {
             console.log('Error en reproductor:', event.data);
-            setTimeout(() => {
+            if (skipTimeout) clearTimeout(skipTimeout);
+            skipTimeout = setTimeout(() => {
               if (player && isPlayerReady) {
                 skipToRandom();
               }
